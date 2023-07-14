@@ -1,0 +1,4 @@
+czym jest klasa, struktura, obiekt
+Zasada 3, Zasada 5
+operatory w c++
+stack vs heap 

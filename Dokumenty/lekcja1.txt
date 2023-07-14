@@ -1,0 +1,82 @@
+/* C++ 
+* 1) Analyze the below code;
+* 2) Don't press the ""Run Code"" unless you were asked to do that;
+* 3) If you find any bug, then try to fix it (there might be no bugs at all);
+*/
+
+
+class A
+{
+public:
+
+	A() 
+    {
+
+        ptr = new char();
+
+    }
+    
+    A(const A& a) 
+    {
+        ptr = a.ptr;
+
+    }
+
+
+
+	A(const char* p) : ptr{ p } 
+    {
+        std::cout << " konstruktor klasy A - lista inicjalizacyjna " << std::endl;
+    }
+	~A() 
+    {
+        std::cout << " destruktor klasy A " << std::endl;
+        std::cout << " destruktor - " << &ptr << std::endl;
+        std::cout << " destruktor - " << *ptr << std::endl;
+
+    }
+private:
+	const char* ptr;
+    std::string myString;
+};
+
+class B
+{
+public:
+	B(const A* p) : ptr{ p } {}
+	~B()
+	{
+		if (ptr)
+		{
+			delete ptr;
+		}
+	}
+private:
+	const A* ptr;
+};
+
+int main()
+{
+    A a = "19.29.20.2";
+    A a2 = a;
+    A a1 = "19.29.20.23";
+    //A a;
+    A a1("sdsdsts"); // section 3
+    std::unique_ptr<int> p;
+    C* ptr = new C(); 
+    std::unique_ptr<C> p;
+	//B b1{ new A{"sdsdsts"} }; // section 3
+	//B b2 = std::move(b1); // section 4
+
+
+    delete ptr;
+}
+						
+							
+							
+							
+							
+							
+							
+							
+							
