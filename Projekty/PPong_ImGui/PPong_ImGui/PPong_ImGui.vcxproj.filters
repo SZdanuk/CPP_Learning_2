@@ -45,6 +45,9 @@
     <ClCompile Include="imgui\imgui_tables.cpp">
       <Filter>Pliki źródłowe\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imstb_truetype.h">
@@ -70,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="imgui\imconfig.h">
       <Filter>Pliki nagłówkowe\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

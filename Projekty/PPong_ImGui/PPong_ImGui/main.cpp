@@ -4,7 +4,7 @@
 #include <d3d11.h>
 #include <tchar.h>
 
-
+#include "Ball.h"
 
 
 // Data
@@ -79,18 +79,7 @@ int main(int, char**)
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
 
-    int ball_pos_x = 500;
-    int ball_pos_y = 500;
-    int ball_speed = 5;
-    enum ballDirs
-    {
-        NE,
-        NW,
-        SE,
-        SW
-    };
-    ballDirs ball_direction = NE;
-
+    ppBall ball_1(500, 500, 5);
 
     // Main loop
     bool done = false;
@@ -173,8 +162,8 @@ int main(int, char**)
             draw_list->AddRect(ImVec2(window_position.x + paddle_pos, (mouse_y - (paddle_y / 2))), ImVec2(window_position.x + paddle_pos + paddle_x, mouse_y + (paddle_y / 2)), col, 0.0f, ImDrawFlags_None, th);// x += sz + spacing;
 
             //Generate Ball
-            draw_list->AddCircleFilled(ImVec2(ball_pos_x, ball_pos_y), ball_size, col, 0);
-
+            draw_list->AddCircleFilled(ImVec2(ball_1.ball_pos_x, ball_1.ball_pos_y), ball_size, col, 0);
+            
             /*
             North east: x++, y--
             North west: x--, y--
@@ -183,34 +172,34 @@ int main(int, char**)
             */
 
             //Ball reach bottom
-            if ((ball_pos_y + ball_size) >= (window_position.y + window_height))
+            if ((ball_1.ball_pos_y + ball_size) >= (window_position.y + window_height))
             {
 
-                if (ball_direction == SE)ball_direction = NE;
-                else if (ball_direction == SW)ball_direction = NW;
+                if (ball_1.ball_direction == ppBall::SE)ball_1.ball_direction = ppBall::NE;
+                else if (ball_1.ball_direction == ppBall::SW)ball_1.ball_direction = ppBall::NW;
 
             }
 
             //Ball reach top
-            if ((ball_pos_y - ball_size) <= window_position.y)
+            if ((ball_1.ball_pos_y - ball_size) <= window_position.y)
             {
 
-                if (ball_direction == NE)ball_direction = SE;
-                else if (ball_direction == NW)ball_direction = SW;
+                if (ball_1.ball_direction == ppBall::NE)ball_1.ball_direction = ppBall::SE;
+                else if (ball_1.ball_direction == ppBall::NW)ball_1.ball_direction = ppBall::SW;
 
             }
 
             //Ball reach right
-            if ((ball_pos_x + ball_size) >= (window_position.x + window_width))
+            if ((ball_1.ball_pos_x + ball_size) >= (window_position.x + window_width))
             {
 
-                if (ball_direction == NE)ball_direction = NW;
-                else if (ball_direction == SE)ball_direction = SW;
+                if (ball_1.ball_direction == ppBall::NE)ball_1.ball_direction = ppBall::NW;
+                else if (ball_1.ball_direction == ppBall::SE)ball_1.ball_direction = ppBall::SW;
 
             }
 
             //Ball reach left
-            if ((ball_pos_x - ball_size) <= (window_position.x))
+            if ((ball_1.ball_pos_x - ball_size) <= (window_position.x))
             {
 
                 ImGui::Text("Game Over");
@@ -219,33 +208,33 @@ int main(int, char**)
 
 
             //Ball reach paddle
-            if (((ball_pos_x - ball_size) < (window_position.x + paddle_pos + paddle_x)) && ((mouse_y - paddle_y / 2) < ball_pos_y) && ((mouse_y + paddle_y / 2) > ball_pos_y))
+            if (((ball_1.ball_pos_x - ball_size) < (window_position.x + paddle_pos + paddle_x)) && ((mouse_y - paddle_y / 2) < ball_1.ball_pos_y) && ((mouse_y + paddle_y / 2) > ball_1.ball_pos_y))
             {
 
                 //ImGui::Text("Paddle");
-                if (ball_direction == SW)ball_direction = SE;
-                else if (ball_direction == NW)ball_direction = NE;
+                if (ball_1.ball_direction == ppBall::SW)ball_1.ball_direction = ppBall::SE;
+                else if (ball_1.ball_direction == ppBall::NW)ball_1.ball_direction = ppBall::NE;
 
             }
 
             //Calculate position
-            switch (ball_direction)
+            switch (ball_1.ball_direction)
             {
-            case NE:
-                ball_pos_x += ball_speed;
-                ball_pos_y -= ball_speed;
+            case ppBall::NE:
+                ball_1.ball_pos_x += ball_1.speed;
+                ball_1.ball_pos_y -= ball_1.speed;
                 break;
-            case NW:
-                ball_pos_x -= ball_speed;
-                ball_pos_y -= ball_speed;
+            case ppBall::NW:
+                ball_1.ball_pos_x -= ball_1.speed;
+                ball_1.ball_pos_y -= ball_1.speed;
                 break;
-            case SE:
-                ball_pos_x += ball_speed;
-                ball_pos_y += ball_speed;
+            case ppBall::SE:
+                ball_1.ball_pos_x += ball_1.speed;
+                ball_1.ball_pos_y += ball_1.speed;
                 break;
-            case SW:
-                ball_pos_x -= ball_speed;
-                ball_pos_y += ball_speed;
+            case ppBall::SW:
+                ball_1.ball_pos_x -= ball_1.speed;
+                ball_1.ball_pos_y += ball_1.speed;
                 break;
             }
 
