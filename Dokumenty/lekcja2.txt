@@ -1,0 +1,8 @@
+L-value vs R-value
+dziedziczenie i typy dziedziczenia
+tworzenie pointerów i alokacja obiektów na Stack vs Heap
+std::move - jak działa, po co się stosuje ?
+new vs malloc
+ Tworzenie ponerów typu Basic -> które pod spodem mają obiekt Derived.
+słówko kluczowe virtual, override 
+wywołanie funkcji z klasy bazowej, wywołanie funkcji z klasy potomnej
