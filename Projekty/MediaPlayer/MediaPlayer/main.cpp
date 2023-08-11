@@ -5,8 +5,31 @@
 #include <tchar.h>
 
 #include "implot.h"
+#include "bass.h"
+
+#include <string>
+
+std::string SONG_PATH = "C:\\Repo\\Mentoring\\song.mp3";
 
 
+
+//HWND win;
+//
+//HSTREAM* strs;
+//int strc;
+//HMUSIC* mods;
+//int modc;
+//HSAMPLE* sams;
+//int samc;
+
+HSAMPLE sam = BASS_SampleLoad(FALSE, &SONG_PATH, 0, 0, 3, BASS_SAMPLE_OVER_POS);
+
+//HCHANNEL ch = BASS_SampleGetChannel(sams[s], FALSE);
+//BASS_SetConfig(BASS_CONFIG_GVOL_SAMPLE, 10000);
+//BASS_ChannelSetAttribute(ch, BASS_ATTRIB_VOL, 0.5f);
+//BASS_ChannelSetAttribute(ch, BASS_ATTRIB_PAN, ((rand() % 201) - 100) / 100.f);
+
+//(const void*)file
 // Data
 static ID3D11Device* g_pd3dDevice = nullptr;
 static ID3D11DeviceContext* g_pd3dDeviceContext = nullptr;
@@ -114,19 +137,53 @@ int main(int, char**)
 
 
 
-        int n = 0;
-        static float thickness = 3.0f;
-        const ImVec2 p = ImGui::GetCursorScreenPos();
-        static float sz = 36.0f;
-        float x = p.x + 4.0f;
-        float y = p.y + 4.0f;
-        float th = (n == 0) ? 1.0f : thickness;
-        const float spacing = 10.0f;
-        const ImU32 col = ImColor(1.0f, 1.0f, 0.4f, 1.0f);
-        int paddle_y = 150;
-        int paddle_x = 25;
-        int paddle_pos = 20;
+        //int n = 0;
+        //static float thickness = 3.0f;
+        //const ImVec2 p = ImGui::GetCursorScreenPos();
+        //static float sz = 36.0f;
+        //float x = p.x + 4.0f;
+        //float y = p.y + 4.0f;
+        //float th = (n == 0) ? 1.0f : thickness;
+        //const float spacing = 10.0f;
+        //const ImU32 col = ImColor(1.0f, 1.0f, 0.4f, 1.0f);
+        //int paddle_y = 150;
+        //int paddle_x = 25;
+        //int paddle_pos = 20;
         //float mouse_y = input_output.MousePos.y;
+
+       // HCHANNEL channel = NULL;
+       // HSTREAM stream = NULL;
+
+       // stream = BASS_StreamCreateFile(FALSE, SONG_PATH.c_str(), 0, 0, 0);
+
+       // BASS_ChannelFree(stream);
+       // std::string path = "";
+       // //wxTimer* myTimer = new wxTimer(this, 1);
+       //// myTimer->SetOwner(this, 1);
+       // bool isPlaying = 1;
+
+       // //path = "" + dialog.GetPath();
+
+       // //songName = wxFileName(path).GetName();
+       // //staticText->SetLabel("" + songName);
+       // BASS_Init(-1, 44100, 0, 0, NULL);
+       // BASS_SetVolume(.02);
+       // HSAMPLE sample = BASS_SampleLoad(false, SONG_PATH.c_str(), 0, 0, 1, BASS_SAMPLE_MONO);
+
+       // stream = BASS_StreamCreateFile(FALSE, SONG_PATH.c_str(), 0, 0, 0);
+       // //myTimer->Start();
+       // channel = BASS_SampleGetChannel(stream, FALSE);
+       // BASS_ChannelPlay(stream, TRUE);
+       // //staticText2 = new wxStaticText(panel_top, wxID_ANY, wxT(""), wxPoint(0, 45));
+       // bool isMediaLoaded = true;
+       // //const char* comments = BASS_ChannelGetTags(channel, BASS_TAG_OGG); // get a pointer to the 1st comment
+       // /*if (comments) {
+
+       //     wxMessageBox(comments);
+       // }*/
+
+       // //int filterIndex = dialog.GetFilterIndex();
+
 
 
 
@@ -141,9 +198,11 @@ int main(int, char**)
             //ImPlot::PlotBars("Vertical", data, 10, 0.7, 1);
             //ImPlot::EndPlot();
             float fft_data[10] = { 5, 2, 3, 4, 5, 6, 7, 8, 9, 5 };
-            ImVec2 histogram_size(ImGui::GetWindowHeight() * 0.6, ImGui::GetWindowHeight() * 0.2);
+            ImVec2 histogram_size(ImGui::GetWindowWidth() * 0.6, ImGui::GetWindowHeight() * 0.2);
             ImGui::PlotHistogram("", fft_data, 10, 0, "", 0, 10, histogram_size, 4);
-            ImVec2 button_size(ImGui::GetWindowHeight()*0.1, ImGui::GetWindowHeight()*0.1);
+            ImVec2 button_size(ImGui::GetWindowWidth()*0.15, ImGui::GetWindowHeight()*0.1);
+            ImGui::Button("OpenFile", button_size);
+            ImGui::SameLine();
             ImGui::Button("<", button_size);
             ImGui::SameLine();
             ImGui::Button("Play", button_size);
@@ -157,35 +216,24 @@ int main(int, char**)
 
 
 
-            float window_width = ImGui::GetWindowWidth();
-            float window_height = ImGui::GetWindowHeight();
-            ImVec2 window_position = ImGui::GetWindowPos();
-            ImGui::Text("%f", window_width);
-            ImGui::Text("%f", window_height);
-            ImGui::Text("Window position:");
-            ImGui::Text("X %f", window_position.x);
-            ImGui::Text("Y %f", window_position.y);
-            ImDrawList* draw_list = ImGui::GetWindowDrawList();
+            //float window_width = ImGui::GetWindowWidth();
+            //float window_height = ImGui::GetWindowHeight();
+            //ImVec2 window_position = ImGui::GetWindowPos();
+            //ImGui::Text("%f", window_width);
+            //ImGui::Text("%f", window_height);
+            //ImGui::Text("Window position:");
+            //ImGui::Text("X %f", window_position.x);
+            //ImGui::Text("Y %f", window_position.y);
+            //ImDrawList* draw_list = ImGui::GetWindowDrawList();
 
-            float mouse_x = ImGui::GetIO().MousePos.x;
-            float mouse_y = ImGui::GetIO().MousePos.y;
+            //float mouse_x = ImGui::GetIO().MousePos.x;
+            //float mouse_y = ImGui::GetIO().MousePos.y;
 
-            ImGui::Text("Mouse");
-            ImGui::Text("X %f", mouse_x);
-            ImGui::Text("Y %f", mouse_y);
+            //ImGui::Text("Mouse");
+            //ImGui::Text("X %f", mouse_x);
+            //ImGui::Text("Y %f", mouse_y);
 
-            //Generate Paddle, min or max in window later
-            draw_list->AddRect(ImVec2(window_position.x + paddle_pos, (mouse_y - (paddle_y / 2))), ImVec2(window_position.x + paddle_pos + paddle_x, mouse_y + (paddle_y / 2)), col, 0.0f, ImDrawFlags_None, th);// x += sz + spacing;
 
-            //Generate Ball
-            //draw_list->AddCircleFilled(ImVec2(ball_1.ball_pos_x, ball_1.ball_pos_y), ball_size, col, 0);
-
-            /*
-            North east: x++, y--
-            North west: x--, y--
-            South east: x++, y++
-            Sount west: x--, y++
-            */
 
 
             ImGui::End();
