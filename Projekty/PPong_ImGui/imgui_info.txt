@@ -1,7 +1,0 @@
-Pobrane z:
-
-https://github.com/ocornut/imgui
-
-stan na:
-
-2023.07.14
